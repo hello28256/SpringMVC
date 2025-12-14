@@ -34,4 +34,14 @@ public class UserController {
         // 3.跳转视图
         return "test";
     }
+
+    /**
+     * @author yangq
+     * @version 1.0
+     * @description: TODO
+     * @date 2025/12/8 11:24
+     */
+
+    public static class GenericEncodingFilter {
+    }
 }
