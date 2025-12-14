@@ -3,44 +3,47 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.yangq</groupId>
+        <artifactId>Spring-MVC</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
 
-    <groupId>com.yangq</groupId>
-    <artifactId>Spring-MVC</artifactId>
-    <version>1.0-SNAPSHOT</version>
-    <packaging>pom</packaging>
-    <modules>
-        <module>springmvc-01-servlet</module>
-        <module>springmvc-02-hellomvc</module>
-        <module>springmvc-03-hello-annotation</module>
-        <module>springmvc-04-controller</module>
-        <module>springmvc-05-json</module>
-        <module>ssmbuild</module>
-        <module>SSM</module>
-    </modules>
+    <artifactId>SSM</artifactId>
 
-
-    <!-- 导入依赖 -->
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+    <!--导入相关的pom依赖-->
     <dependencies>
         <!--Junit-->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.12</version>
+            <version>4.11</version>
+            <scope>test</scope>
         </dependency>
         <!--数据库驱动-->
         <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.47</version>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+            <version>8.0.33</version>
         </dependency>
-        <!-- 数据库连接池 -->
+        <!--分页插件-->
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper</artifactId>
+            <version>5.0.0</version>
+        </dependency>
+        <!--数据库连接池-->
         <dependency>
             <groupId>com.mchange</groupId>
             <artifactId>c3p0</artifactId>
-            <version>0.9.5.2</version>
+            <version>0.9.5.3</version>
         </dependency>
-
-        <!--Servlet - JSP -->
+        <!--Servlet - JSP-->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>servlet-api</artifactId>
@@ -56,7 +59,6 @@
             <artifactId>jstl</artifactId>
             <version>1.2</version>
         </dependency>
-
         <!--Mybatis-->
         <dependency>
             <groupId>org.mybatis</groupId>
@@ -68,7 +70,6 @@
             <artifactId>mybatis-spring</artifactId>
             <version>2.0.2</version>
         </dependency>
-
         <!--Spring-->
         <dependency>
             <groupId>org.springframework</groupId>
@@ -80,27 +81,39 @@
             <artifactId>spring-jdbc</artifactId>
             <version>5.1.9.RELEASE</version>
         </dependency>
+        <!--横切-->
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>1.9.5</version>
+        </dependency>
+
+
+        <!--lombok  可以不用-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.8</version>
+        </dependency>
     </dependencies>
 
-
-
+    <!--Maven资源过滤设置-->
     <build>
         <resources>
-            <resource>
-                <directory>src/main/java</directory>
-                <includes>
-                    <include>**/*.properties</include>
-                    <include>**/*.xml</include>
-                </includes>
-                <filtering>false</filtering>
-            </resource>
+            <!-- 默认资源目录 -->
             <resource>
                 <directory>src/main/resources</directory>
                 <includes>
-                    <include>**/*.properties</include>
+                    <include>**/*.*</include>
+                </includes>
+            </resource>
+
+            <!-- 让 src/main/java 下的 xml 参与打包 -->
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
                     <include>**/*.xml</include>
                 </includes>
-                <filtering>false</filtering>
             </resource>
         </resources>
     </build>
